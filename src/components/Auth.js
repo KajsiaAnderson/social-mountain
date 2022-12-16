@@ -15,8 +15,11 @@ const Auth = () => {
         username,
         password
        }
+
+       const url = 'http://localhost:3000'
+    // const url = 'https://socialmtn.devmountain.com'
  
-       axios.post(register ? "https://socialmtn.devmountain.com/register" : "https://socialmtn.devmountain.com/login", body)
+       axios.post(register ? `${url}/register` : `${url}/login`, body)
        .then((res) => {
         console.log('data', res.data)
         authCtx.login(res.data.token, res.data.exp, res.data.userId)
