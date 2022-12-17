@@ -7,9 +7,12 @@ const Auth = () => {
    const [username, setUsername] = useState('')
    const [password, setPassword] = useState('')
    const [register, setRegister] = useState(true)
+   const [message, setMessage] = useState('')
+   const [display, setDisplay] = useState('none')
  
    const submitHandler = e => {
        e.preventDefault()
+       setDisplay('none')
 
        const body = {
         username,
@@ -26,6 +29,8 @@ const Auth = () => {
        })
        .catch(err => {
         console.log('error', err)
+        setMessage(err.response.data)
+        setDisplay('block')
         setUsername('')
         setPassword('')
        })
@@ -54,6 +59,7 @@ const Auth = () => {
                    {register ? 'Sign Up' : 'Login'}
                </button>
            </form>
+           <p style={{display: display}} className='auth-msg'>{message}</p>
            <button className='form-btn' onClick={() => setRegister(!register)}>Need to {register ? 'Login' : 'Sign Up'}?</button>
        </main>
    )
